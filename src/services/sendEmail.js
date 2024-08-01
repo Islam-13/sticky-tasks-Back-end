@@ -9,13 +9,13 @@ const sendEmail = async (
   const transporter = createTransport({
     service: "gmail",
     auth: {
-      user: "islam.hussen.13@gmail.com",
-      pass: "qxtchwbrozztrcve",
+      user: process.env.emailSender,
+      pass: process.env.emailPassword,
     },
   });
 
   const info = await transporter.sendMail({
-    from: '"Sticky Tasks 👻" <islam.hussen.13@gmail.com>',
+    from: `"Sticky Tasks 👻" <${process.env.emailSender}>`,
     to,
     subject,
     html,
