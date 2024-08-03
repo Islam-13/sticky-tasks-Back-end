@@ -19,7 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) =>
-  res.status(201).json({ message: "Welcome to STICKY NOTES..." })
+  res.status(201).json({ message: "Welcome to STICKY TASKS..." })
 );
 
 app.use("/users", usersRouter);
