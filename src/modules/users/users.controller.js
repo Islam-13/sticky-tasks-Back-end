@@ -216,7 +216,7 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
 export const changePassword = asyncHandler(async (req, res, next) => {
   const { password } = req.body;
 
-  const hashed = bcrypt.hashSync(password, process.env.saltRounds);
+  const hashed = bcrypt.hashSync(password, parseInt(process.env.saltRounds));
 
   const user = await userModel.findOneAndUpdate(
     { _id: req.user._id },
