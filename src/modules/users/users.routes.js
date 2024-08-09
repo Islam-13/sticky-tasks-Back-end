@@ -23,4 +23,6 @@ router.post("/verifyEmail", UC.verifyEmail);
 
 router.post("/resetPassword", UC.resetPassword);
 
+router.get("/profile", auth(Object.values(systemRoles)), UC.getProfile);
+
 export default router;

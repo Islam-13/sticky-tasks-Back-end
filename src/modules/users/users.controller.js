@@ -190,3 +190,11 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
 
   res.status(201).json({ status: "success", token });
 });
+
+export const getProfile = asyncHandler(async (req, res, next) => {
+  const user = await userModel.findById(req.user._id);
+
+  if (!user) return next(new AppError("User not found"));
+
+  res.status(201).json({ status: "success", user });
+});

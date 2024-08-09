@@ -22,7 +22,14 @@ export const getAllTasks = asyncHandler(async (req, res, next) => {
 });
 
 export const getTasks = asyncHandler(async (req, res, next) => {
-  const tasks = await taskModel.find({ userId: req.user._id });
+  let tasks;
+
+  if (req.query?.search) {
+    tasks = await taskModel.find({
+      userId: req.user._id,
+      title: { $regex: req.query.search, $options: "i" },
+    });
+  } else tasks = await taskModel.find({ userId: req.user._id });
 
   if (!tasks) return next(new AppError("Error getting tasks", 500));
 
