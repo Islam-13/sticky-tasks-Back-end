@@ -35,7 +35,7 @@ router.put(
 router.patch(
   "/changePassword",
   auth(Object.values(systemRoles)),
-  validation(UV.updateProfile),
+  validation(UV.changePassword),
   UC.changePassword
 );
 
