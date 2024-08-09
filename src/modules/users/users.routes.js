@@ -32,4 +32,11 @@ router.put(
   UC.updateProfile
 );
 
+router.patch(
+  "/changePassword",
+  auth(Object.values(systemRoles)),
+  validation(UV.updateProfile),
+  UC.changePassword
+);
+
 export default router;

@@ -24,3 +24,10 @@ export const updateProfile = {
     phone: Joi.string().min(10).max(11),
   }).required(),
 };
+
+export const changePassword = {
+  body: Joi.object({
+    password: Joi.string().min(6).max(15).required(),
+    confirmPassword: Joi.string().valid(Joi.ref("password")).required(),
+  }).required(),
+};

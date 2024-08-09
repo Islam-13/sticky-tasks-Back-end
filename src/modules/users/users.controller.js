@@ -210,5 +210,23 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
 
   res
     .status(201)
-    .json({ status: "success", message: "User updated successfully", user });
+    .json({ status: "success", message: "Profile updated successfully", user });
+});
+
+export const changePassword = asyncHandler(async (req, res, next) => {
+  const { password } = req.body;
+
+  const hashed = bcrypt.hashSync(password, process.env.saltRounds);
+
+  const user = await userModel.findOneAndUpdate(
+    { _id: req.user._id },
+    { password: hashed }
+  );
+
+  if (!user) return next(new AppError("User not found"));
+
+  res.status(201).json({
+    status: "success",
+    message: "Password changed successfully",
+  });
 });
