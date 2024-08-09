@@ -198,3 +198,17 @@ export const getProfile = asyncHandler(async (req, res, next) => {
 
   res.status(201).json({ status: "success", user });
 });
+
+export const updateProfile = asyncHandler(async (req, res, next) => {
+  const user = await userModel.findOneAndUpdate(
+    { _id: req.user._id },
+    req.body,
+    { new: true }
+  );
+
+  if (!user) return next(new AppError("User not found"));
+
+  res
+    .status(201)
+    .json({ status: "success", message: "User updated successfully", user });
+});

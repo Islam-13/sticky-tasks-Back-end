@@ -16,3 +16,11 @@ export const signIn = {
     password: Joi.string().min(6).max(15).required(),
   }).required(),
 };
+
+export const updateProfile = {
+  body: Joi.object({
+    firstName: Joi.string().min(3).max(15),
+    lastName: Joi.string().min(3).max(15),
+    phone: Joi.string().min(10).max(11),
+  }).required(),
+};

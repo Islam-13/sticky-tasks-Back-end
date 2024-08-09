@@ -25,4 +25,11 @@ router.post("/resetPassword", UC.resetPassword);
 
 router.get("/profile", auth(Object.values(systemRoles)), UC.getProfile);
 
+router.put(
+  "/updateProfile",
+  auth(Object.values(systemRoles)),
+  validation(UV.updateProfile),
+  UC.updateProfile
+);
+
 export default router;
