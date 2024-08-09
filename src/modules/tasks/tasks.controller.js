@@ -41,7 +41,8 @@ export const updateTask = asyncHandler(async (req, res, next) => {
 
   const task = await taskModel.findOneAndUpdate(
     { _id, userId: req.user._id },
-    req.body
+    req.body,
+    { new: true }
   );
 
   !task
@@ -49,6 +50,7 @@ export const updateTask = asyncHandler(async (req, res, next) => {
     : res.status(201).json({
         status: "success",
         message: "Task updated successfully",
+        data: task,
       });
 });
 
