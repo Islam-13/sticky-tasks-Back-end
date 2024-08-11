@@ -77,24 +77,23 @@ export const getTasksByCategory = asyncHandler(async (req, res, next) => {
 });
 
 export const clearTasks = asyncHandler(async (req, res, next) => {
-  const tasks = await taskModel.deleteMany({ userId: req.user._id });
-
-  if (!tasks) return next(new AppError("Error getting tasks", 500));
-
-  res.status(201).json({
-    status: "success",
-    message: "Tasks cleared successfully",
-  });
-});
-
-export const clearByCategory = asyncHandler(async (req, res, next) => {
   const { category } = req.params;
-  const tasks = await taskModel.deleteMany({ userId: req.user._id, category });
 
-  if (!tasks) return next(new AppError("Error getting tasks", 500));
+  if (category == "all") {
+    const tasks = await taskModel.deleteMany({ userId: req.user._id });
+    if (!tasks) return next(new AppError("Error clearing tasks", 500));
+
+    return res.status(201).json({
+      status: "success",
+      message: "Tasks cleared successfully",
+    });
+  }
+
+  const tasks = await taskModel.deleteMany({ userId: req.user._id, category });
+  if (!tasks) return next(new AppError("Error clearing tasks", 500));
 
   res.status(201).json({
     status: "success",
-    message: "Tasks cleared successfully",
+    message: `${category} tasks cleared successfully`,
   });
 });

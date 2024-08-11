@@ -39,12 +39,10 @@ router.delete(
   TC.deleteTask
 );
 
-router.delete("/", auth(Object.values(systemRoles)), TC.clearTasks);
-
 router.delete(
-  "/:category",
+  "/clearTasks/:category",
   auth(Object.values(systemRoles)),
-  TC.clearByCategory
+  TC.clearTasks
 );
 
 export default router;
