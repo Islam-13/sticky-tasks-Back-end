@@ -10,7 +10,7 @@ const validation = (schema) => {
 
         if (error?.details) {
           error.details.forEach((detail) => {
-            errorsArr.push(detail);
+            errorsArr.push(detail.message);
           });
         }
       }

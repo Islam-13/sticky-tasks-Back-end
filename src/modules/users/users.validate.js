@@ -6,7 +6,7 @@ export const signUp = {
     lastName: Joi.string().min(3).max(15).required(),
     email: Joi.string().email().required(),
     password: Joi.string().min(6).max(15).required(),
-    phone: Joi.string().valid("", Joi.string().regex(/^01[0125][0-9]{8}$/)),
+    phone: Joi.string().pattern(new RegExp(/^01[0125][0-9]{8}$/)),
   }),
 };
 
@@ -21,10 +21,7 @@ export const updateProfile = {
   body: Joi.object({
     firstName: Joi.string().min(3).max(15),
     lastName: Joi.string().min(3).max(15),
-    phone: Joi.string().valid(
-      "",
-      Joi.string().pattern(new RegExp(/^01[0125][0-9]{8}$/))
-    ),
+    phone: Joi.string().pattern(new RegExp(/^01[0125][0-9]{8}$/)),
   }).required(),
 };
 
